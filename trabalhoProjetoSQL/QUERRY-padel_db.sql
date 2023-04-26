@@ -25,4 +25,9 @@ CREATE TABLE IF NOT EXISTS Ranking (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+# Alterando colunas ou a propria tabela
+ALTER TABLE Ranking
+ADD ano YEAR,
+ADD INDEX `IndexAno` (ano DESC) VISIBLE;
+
 select * from Ranking;
