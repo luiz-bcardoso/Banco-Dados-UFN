@@ -28,7 +28,7 @@ WHERE isbn = '8532511015'
 /******************************/	
 
 SELECT 'A data do autor eh : ' +
-CONVERT(VARCHAR(10), dbo.Autor.DataNasc)
+CONVERT(VARCHAR(10), dbo.Autor.dataNasc)
 FROM Autor
 WHERE Autor.id = 1
 
@@ -38,5 +38,18 @@ FROM Autor
 WHERE Autor.id = 1
 /******************************/
 
-
+DECLARE @nomeAutor VARCHAR(100) = 'Juca da Silva';
+-- SE o @nomeAutor NÃO EXISTIR CADASTRO no banco, entao...
+IF NOT EXISTS (SELECT * FROM Autor WHERE Autor.nome = @nomeAutor)
+	INSERT INTO Autor VALUES (@nomeAutor, 'Brasileiro', '2001-02-28')
+ELSE
+	UPDATE Autor SET Autor.DataNasc = '2001-02-28'
+	WHERE Autor.nome = @nomeAutor;
 /******************************/
+
+DECLARE @valor INT SET @valor = 0;
+WHILE @valor < 10
+	BEGIN
+		PRINT 'Numero: '+ CAST(@valor AS VARCHAR (1));
+		SET @valor = @valor+1;
+	END
