@@ -48,8 +48,19 @@ ELSE
 /******************************/
 
 DECLARE @valor INT SET @valor = 0;
-WHILE @valor < 10
+DECLARE @totalAutores INT;
+
+SELECT @totalAutores = MAX(Autor.id)
+FROM Autor;
+
+SELECT @totalAutores AS "Qtd."
+
+
+WHILE @valor < @totalAutores
 	BEGIN
-		PRINT 'Numero: '+ CAST(@valor AS VARCHAR (1));
+		PRINT 'Numero: '+ CAST(@valor AS VARCHAR (10));
 		SET @valor = @valor+1;
+		UPDATE Autor SET Autor.DataNasc = '2022-08-25'
+		WHERE Autor.id = @valor
 	END
+SELECT * FROM Autor
